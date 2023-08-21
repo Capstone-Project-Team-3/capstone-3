@@ -123,6 +123,7 @@ const products = [
   }
 ];
 
+
 const dropTables = async () => {
     try {
         await db.query(`
@@ -224,6 +225,7 @@ const insertUsers = async () => {
     console.error('Error inserting seed data:', error);
   }
 };
+
 
 const seedDatabse = async () => {
     try {
