@@ -218,7 +218,7 @@ const createTables = async () => {
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({name: user.name, email: user.email, password: user.password});
+      await createUser({name: user.name, email: user.email, password: user.password, billingInfo_id: user.billingInfo_id});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
@@ -226,6 +226,50 @@ const insertUsers = async () => {
   }
 };
 
+const insertProducts = async () => {
+  try {
+    for (const product of products) {
+      await createProduct({title: product.title, description: product.description, price: product.price, seller: product.seller, availability: product.availability, quantity: product.quantity, category: product.category, image: product.image});
+    }
+    console.log('Seed data for products inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for products:', error);
+  }
+};
+  
+  const insertOrders = async () => {
+  try {
+    for (const order of orders) {
+      await createOrder({user_id: order.user_id, product_id: order.product_id, total: order.total, billingInfo: order.billingInfo, status: order.status});
+    }
+    console.log('Seed data for orders inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for orders:', error);
+  }
+  };
+  
+  const insertProductOrders = async () => {
+  try {
+    for (const productOrder of productOrders) {
+      await createProductOrder({product_id: productOrder.product_id, quantity: productOrder.quantity, order_id: productOrder.order_id, createdAt: productOrder.createdAt, modifiedAt: productOrder.modifiedAt });
+    }
+    console.log('Seed data for product orders inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for product orders:', error);
+  }
+  };
+  
+  const insertBillingInfos = async () => {
+  try {
+    for (const billingInfo of billingInfos) {
+      await createBillingInfo({paymentType: billingInfo.paymentType, cardNum: billingInfo.cardNum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
+    }
+    console.log('Seed data for billing info inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for billing info:', error);
+  }
+  };
+  
 
 const seedDatabse = async () => {
     try {
