@@ -1,6 +1,7 @@
 const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./products');
+const { createBillingInfos } = require('./billingInfo')
 
 const users = [
   {
@@ -171,6 +172,44 @@ const products = [
   }
 ];
 
+const billingInfos = [
+  {
+    paymenttype: 'mastercard',
+    cardnum: '**** **** **** 1234',
+    createdAt: '2023-08-22 14:30:00',
+    billingAddress: '123 Main Street, Cityville, ABC 12345',
+    shippingAddress: '123 Main Street, Cityville, ABC 12345'
+  },
+  {
+    paymenttype: 'visa',
+    cardnum: '**** **** **** 5678',
+    createdAt: '2023-08-22 14:30:00',
+    billingAddress: '789 Oak Lane, Villagetown, DEF 54321',
+    shippingAddress: '789 Oak Lane, Villagetown, DEF 54321'
+  },
+  {
+    paymenttype: 'discover',
+    cardnum: '**** **** **** 9876',
+    createdAt: '2023-08-22 11:30:00',
+    billingAddress: '321 Pine Road, Hamletville, GHI 98765',
+    shippingAddress: '321 Pine Road, Hamletville, GHI 98765'
+  },
+  {
+    paymenttype: 'american_express',
+    cardnum: '**** **** **** 5431',
+    createdAt: '2023-08-22 09:00:00',
+    billingAddress: '555 Maple Street, Orchard City, JKL 34567',
+    shippingAddress: '555 Maple Street, Orchard City, JKL 34567'
+  },
+  {
+    paymenttype: 'american_express',
+    cardnum: '**** **** **** 3590',
+    createdAt: '2023-08-22 15:10:00',
+    billingAddress: '444 Oak Street, Townsville, VWX 98765',
+    shippingAddress: '444 Oak Street, Townsville, VWX 98765'
+  }
+]
+
 const dropTables = async () => {
     try {
         await db.query(`
@@ -195,7 +234,7 @@ const createTables = async () => {
       CREATE TABLE billingInfos(
         id SERIAL PRIMARY KEY,
         paymentType cardtype,
-        cardNum VARCHAR(16),
+        cardNum VARCHAR(25),
         createdAt TIMESTAMP,
         billingAddress TEXT,
         shippingAddress TEXT
@@ -306,16 +345,16 @@ const insertProducts = async () => {
   // }
   // };
   
-  // const insertBillingInfos = async () => {
-  // try {
-  //   for (const billingInfo of billingInfos) {
-  //     await createBillingInfos({paymentType: billingInfo.paymentType, cardNum: billingInfo.cardNum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
-  //   }
-  //   console.log('Seed data for billing info inserted successfully.');
-  // } catch (error) {
-  //   console.error('Error inserting seed data for billing info:', error);
-  // }
-  // };
+  const insertBillingInfos = async () => {
+  try {
+    for (const billingInfo of billingInfos) {
+      await createBillingInfos({paymenttype: billingInfo.paymenttype, cardnum: billingInfo.cardnum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
+    }
+    console.log('Seed data for billing info inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for billing info:', error);
+  }
+  };
   
 
 const seedDatabse = async () => {
@@ -327,7 +366,7 @@ const seedDatabse = async () => {
         await insertProducts()
         // await insertOrders(),
         // await insertProductOrders(),
-        // await insertBillingInfos()
+        await insertBillingInfos()
     }
     catch (err) {
         throw err;
