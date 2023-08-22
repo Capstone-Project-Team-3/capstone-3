@@ -1,33 +1,81 @@
 const db = require('./client');
 const { createUser } = require('./users');
+const { createProduct } = require('./products');
 
 const users = [
   {
     name: 'Emily Johnson',
     email: 'emily@example.com',
     password: 'securepass',
+    billinginfo_id: 1,
+    phonenumber: '6184536888',
+    isadmin: false
   },
   {
     name: 'Liu Wei',
     email: 'liu@example.com',
     password: 'strongpass',
+    billinginfo_id: 2,
+    phonenumber: '4156758888', 
+    isadmin: false
   },
   {
     name: 'Isabella García',
     email: 'bella@example.com',
     password: 'pass1234',
+    billinginfo_id: 3,
+    phonenumber: '9891233214',
+    isadmin: false
   },
   {
     name: 'Mohammed Ahmed',
     email: 'mohammed@example.com',
     password: 'mysecretpassword',
+    billinginfo_id: 4,
+    phonenumber: '7865434455',
+    isadmin: false
   },
   {
     name: 'John Smith',
     email: 'john@example.com',
     password: 'password123',
+    billinginfo_id: 5,
+    phonenumber: '9098792121',
+    isadmin: false
   },
-  // Add more user objects as needed
+  {
+    name: 'Naethan Martinez',
+    email: 'Naethan@example.com',
+    password: 'naethan1',
+    billinginfo_id: 6,
+    phonenumber: '7607874606',
+    isadmin: true
+    
+  },
+  {
+    name: 'Seishin LeBlanc',
+    email: 'Seishin@example.com',
+    password: 'seishin1',
+    billinginfo_id: 7,
+    phonenumber: '5146788999',
+    isadmin: true    
+  },
+  {
+    name: 'Jeremiah Stone',
+    email: 'Jeremiah@example.com',
+    password: 'jeremiah1',
+    billinginfo_id: 8,
+    phonenumber: '1213334606',
+    isadmin: true
+  },
+  {
+    name: 'Kobe White',
+    email: 'Kobe@example.com',
+    password: 'kobe1',    
+    billinginfo_id: 9,
+    phonenumber: '4535556666',
+    isadmin: true
+  }
 ];  
 
 const products = [
@@ -42,8 +90,8 @@ const products = [
   image: 'https://images-na.ssl-images-amazon.com/images/G/01/aplus/detail-page/B00D9EPI38_img1_lg.jpg'
   },
   {
-  title: 'PLaystation 3',
-  description: '',
+  title: 'Playstation 3',
+  description: 'The PlayStation 3 (PS3) is a home video game console developed by Sony Computer Entertainment. It was released in 2006 as the successor to the PlayStation 2 and competed with Microsoft\'s Xbox 360 and Nintendo\'s Wii. The PS3 introduced advanced hardware capabilities, including a powerful Cell Broadband Engine processor and a Blu-ray disc drive, which allowed for high-definition gaming and media playback. The console featured a range of popular gaming titles, multimedia features, and online connectivity through the PlayStation Network, enabling players to download games, stream content, and engage in online multiplayer gaming.',
   price: 120.00,
   seller: 'Sony',
   availability: 'true',
@@ -123,7 +171,6 @@ const products = [
   }
 ];
 
-
 const dropTables = async () => {
     try {
         await db.query(`
@@ -173,13 +220,13 @@ const createTables = async () => {
         CREATE TABLE products(
           id SERIAL PRIMARY KEY,
           title VARCHAR(255) NOT NULL,
-          description VARCHAR(255) NOT NULL,
+          description TEXT NOT NULL,
           price DECIMAL(10,2) NOT NULL,
           seller TEXT NOT NULL,
           availability BOOLEAN DEFAULT false,
           quantity INTEGER NOT NULL,
           category TEXT NOT NULL,
-          image VARCHAR(255)
+          image TEXT
         );
         `);
     
@@ -218,7 +265,7 @@ const createTables = async () => {
 const insertUsers = async () => {
   try {
     for (const user of users) {
-      await createUser({name: user.name, email: user.email, password: user.password, billingInfo_id: user.billingInfo_id});
+      await createUser({name: user.name, email: user.email, password: user.password, billinginfo_id: user.billinginfo_id, phonenumber: user.phonenumber, isadmin: user.isadmin});
     }
     console.log('Seed data inserted successfully.');
   } catch (error) {
@@ -237,38 +284,38 @@ const insertProducts = async () => {
   }
 };
   
-  const insertOrders = async () => {
-  try {
-    for (const order of orders) {
-      await createOrder({user_id: order.user_id, product_id: order.product_id, total: order.total, billingInfo: order.billingInfo, status: order.status});
-    }
-    console.log('Seed data for orders inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting seed data for orders:', error);
-  }
-  };
+  // const insertOrders = async () => {
+  // try {
+  //   for (const order of orders) {
+  //     await createOrder({user_id: order.user_id, product_id: order.product_id, total: order.total, billingInfo: order.billinginfo, status: order.status});
+  //   }
+  //   console.log('Seed data for orders inserted successfully.');
+  // } catch (error) {
+  //   console.error('Error inserting seed data for orders:', error);
+  // }
+  // };
   
-  const insertProductOrders = async () => {
-  try {
-    for (const productOrder of productOrders) {
-      await createProductOrder({product_id: productOrder.product_id, quantity: productOrder.quantity, order_id: productOrder.order_id, createdAt: productOrder.createdAt, modifiedAt: productOrder.modifiedAt });
-    }
-    console.log('Seed data for product orders inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting seed data for product orders:', error);
-  }
-  };
+  // const insertProductOrders = async () => {
+  // try {
+  //   for (const productOrder of productOrders) {
+  //     await createProductOrders({product_id: productOrder.product_id, quantity: productOrder.quantity, order_id: productOrder.order_id, createdAt: productOrder.createdAt, modifiedAt: productOrder.modifiedAt });
+  //   }
+  //   console.log('Seed data for product orders inserted successfully.');
+  // } catch (error) {
+  //   console.error('Error inserting seed data for product orders:', error);
+  // }
+  // };
   
-  const insertBillingInfos = async () => {
-  try {
-    for (const billingInfo of billingInfos) {
-      await createBillingInfo({paymentType: billingInfo.paymentType, cardNum: billingInfo.cardNum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
-    }
-    console.log('Seed data for billing info inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting seed data for billing info:', error);
-  }
-  };
+  // const insertBillingInfos = async () => {
+  // try {
+  //   for (const billingInfo of billingInfos) {
+  //     await createBillingInfos({paymentType: billingInfo.paymentType, cardNum: billingInfo.cardNum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
+  //   }
+  //   console.log('Seed data for billing info inserted successfully.');
+  // } catch (error) {
+  //   console.error('Error inserting seed data for billing info:', error);
+  // }
+  // };
   
 
 const seedDatabse = async () => {
@@ -277,6 +324,10 @@ const seedDatabse = async () => {
         await dropTables();
         await createTables();
         await insertUsers();
+        await insertProducts()
+        // await insertOrders(),
+        // await insertProductOrders(),
+        // await insertBillingInfos()
     }
     catch (err) {
         throw err;
