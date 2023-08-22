@@ -21,10 +21,7 @@ const createProduct = async ({title, description, price, seller, availability, q
 
 
 module.exports = {
-    createProduct,
-    // createOrders,
-    // createProductOrders,
-    // createBillingInfo
+    createProduct
 };
 
 
