@@ -2,6 +2,8 @@ const db = require('./client');
 const { createUser } = require('./users');
 const { createProduct } = require('./products');
 const { createBillingInfos } = require('./billingInfo')
+const { createOrder } = require('./orders')
+// const { createProductOrder } = required('./product')
 
 const users = [
   {
@@ -48,7 +50,7 @@ const users = [
     name: 'Naethan Martinez',
     email: 'Naethan@example.com',
     password: 'naethan1',
-    billinginfo_id: 6,
+    billinginfo_id: 2,
     phonenumber: '7607874606',
     isadmin: true
     
@@ -57,7 +59,7 @@ const users = [
     name: 'Seishin LeBlanc',
     email: 'Seishin@example.com',
     password: 'seishin1',
-    billinginfo_id: 7,
+    billinginfo_id: 3,
     phonenumber: '5146788999',
     isadmin: true    
   },
@@ -65,7 +67,7 @@ const users = [
     name: 'Jeremiah Stone',
     email: 'Jeremiah@example.com',
     password: 'jeremiah1',
-    billinginfo_id: 8,
+    billinginfo_id: 4,
     phonenumber: '1213334606',
     isadmin: true
   },
@@ -73,7 +75,7 @@ const users = [
     name: 'Kobe White',
     email: 'Kobe@example.com',
     password: 'kobe1',    
-    billinginfo_id: 9,
+    billinginfo_id: 5,
     phonenumber: '4535556666',
     isadmin: true
   }
@@ -172,7 +174,7 @@ const products = [
   }
 ];
 
-const billingInfos = [
+const billinginfos = [
   {
     paymenttype: 'mastercard',
     cardnum: '**** **** **** 1234',
@@ -210,6 +212,47 @@ const billingInfos = [
   }
 ]
 
+const orders = [
+  {
+    user_id: 1,
+    total: null,
+    billinginfo_id: 1,
+    createdAt:'2023-08-22 15:10:00' ,
+    status: "delivered"
+  },
+  {
+    user_id: 3,
+    total: null,
+    billinginfo_id: 3,
+    createdAt: '2023-08-22 15:10:00' ,
+    status: "shipped"
+  }
+]
+
+// const productOrders = [
+//   {
+//     product_id: 3,
+//     quantity: 1,
+//     order_id: 1,
+//     createdAt: `2023-08-22 15:10:00`,
+//     modifiedAt: `T2023-08-22 15:10:00`
+//   },
+//   {
+//     product_id: 5,
+//     quantity: 1,
+//     order_id: 1,
+//     createdAt: `2023-08-22 15:10:00`,
+//     modifiedAt: `2023-08-22 15:10:00`
+//   },
+//   {
+//     product_id: 8,
+//     quantity: 1,
+//     order_id: 2,
+//     createdAt: `2023-08-22 15:10:00`,
+//     modifiedAt: `2023-08-22 15:10:00`
+//   }
+// ]
+
 const dropTables = async () => {
     try {
         await db.query(`
@@ -217,7 +260,7 @@ const dropTables = async () => {
         DROP TABLE IF EXISTS orders;
         DROP TABLE IF EXISTS users;
         DROP TABLE IF EXISTS products;
-        DROP TABLE IF EXISTS billingInfos;
+        DROP TABLE IF EXISTS billinginfos;
         DROP TYPE IF EXISTS cardtype;
         DROP TYPE IF EXISTS statustype;
         `)
@@ -231,7 +274,7 @@ const createTables = async () => {
     try{
       await db.query(`
       CREATE TYPE cardtype as ENUM ('mastercard', 'visa', 'american_express', 'discover');
-      CREATE TABLE billingInfos(
+      CREATE TABLE billinginfos(
         id SERIAL PRIMARY KEY,
         paymentType cardtype,
         cardNum VARCHAR(25),
@@ -247,7 +290,7 @@ const createTables = async () => {
             name VARCHAR(255) DEFAULT 'name',
             email VARCHAR(255) UNIQUE NOT NULL,
             password VARCHAR(255) NOT NULL,
-            billingInfo_id INTEGER REFERENCES billingInfos(id),
+            billinginfo_id INTEGER REFERENCES billinginfos(id),
             phoneNumber VARCHAR(10),
             isAdmin BOOLEAN DEFAULT false
         );
@@ -275,9 +318,8 @@ const createTables = async () => {
         CREATE TABLE orders(
           id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users(id),
-          product_id INTEGER REFERENCES products(id),
           total DECIMAL(10,2),
-          billingInfo_id INTEGER REFERENCES billingInfos(id),
+          billinginfo_id INTEGER REFERENCES billinginfos(id),
           createdAt TIMESTAMP,
           status statustype
         );
@@ -323,16 +365,17 @@ const insertProducts = async () => {
   }
 };
   
-  // const insertOrders = async () => {
-  // try {
-  //   for (const order of orders) {
-  //     await createOrder({user_id: order.user_id, product_id: order.product_id, total: order.total, billingInfo: order.billinginfo, status: order.status});
-  //   }
-  //   console.log('Seed data for orders inserted successfully.');
-  // } catch (error) {
-  //   console.error('Error inserting seed data for orders:', error);
-  // }
-  // };
+  const insertOrders = async () => {
+  try {
+    for (const order of orders) {
+      console.log(order.billinginfo_id)
+      await createOrder({user_id: order.user_id, total: order.total, billinginfo_id: order.billinginfo_id, createdAt: order.createdAt, status: order.status});
+    }
+    console.log('Seed data for orders inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting seed data for orders:', error);
+  }
+  };
   
   // const insertProductOrders = async () => {
   // try {
@@ -345,10 +388,10 @@ const insertProducts = async () => {
   // }
   // };
   
-  const insertBillingInfos = async () => {
+  const insertBillinginfos = async () => {
   try {
-    for (const billingInfo of billingInfos) {
-      await createBillingInfos({paymenttype: billingInfo.paymenttype, cardnum: billingInfo.cardnum, createdAt: billingInfo.createdAt, billingAddress: billingInfo.billingAddress, shippingAddress: billingInfo.shippingAddress});
+    for (const billinginfo of billinginfos) {
+      await createBillingInfos({paymenttype: billinginfo.paymenttype, cardnum: billinginfo.cardnum, createdAt: billinginfo.createdAt, billingAddress: billinginfo.billingAddress, shippingAddress: billinginfo.shippingAddress});
     }
     console.log('Seed data for billing info inserted successfully.');
   } catch (error) {
@@ -362,11 +405,11 @@ const seedDatabse = async () => {
         db.connect();
         await dropTables();
         await createTables();
+        await insertBillinginfos();
         await insertUsers();
-        await insertProducts()
-        // await insertOrders(),
+        await insertProducts();
+        await insertOrders()
         // await insertProductOrders(),
-        await insertBillingInfos()
     }
     catch (err) {
         throw err;
