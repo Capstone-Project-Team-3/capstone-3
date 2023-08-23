@@ -61,11 +61,10 @@ productsRouter.post('/newproduct', async(req, res, next) => {
             category,
             image
         });
-        return product;
         res.send({
-            message: 'Created Products successful!',
-            token
+            message: 'Created Product successful!',
         });
+        return product;
     } catch({name, message}) {
         next({name, message})
     }
@@ -74,9 +73,12 @@ productsRouter.post('/newproduct', async(req, res, next) => {
 productsRouter.delete('/:id', async (req, res, next) => {
     try {
         const deleteProducts = await deleteProduct(req.params.id)
+        // res.send({
+        //     message: "Deleted Succussefully!"
+        // });
         res.send(deleteProducts)
     } catch(err) {
-        next(err)
+        console.log(err)
     }
 });
 
