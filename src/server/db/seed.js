@@ -235,7 +235,7 @@ const productOrders = [
     quantity: 1,
     order_id: 1,
     createdAt: '2023-08-22 15:10:00',
-    modifiedAt: 'T2023-08-22 15:10:00'
+    modifiedAt: '2023-08-22 15:10:00'
   },
   {
     product_id: 5,
@@ -380,7 +380,6 @@ const insertProducts = async () => {
   const insertProductOrders = async () => {
   try {
     for (const productOrder of productOrders) {
-      console.log(productOrder.product_id)
       await createProductOrder({product_id: productOrder.product_id, quantity: productOrder.quantity, order_id: productOrder.order_id, createdAt: productOrder.createdAt, modifiedAt: productOrder.modifiedAt });
     }
     console.log('Seed data for product orders inserted successfully.');
