@@ -75,13 +75,11 @@ const deleteProduct = async (productId) => {
 }
 
 module.exports = {
-    createUser,
-    getUser,
-    getUserByEmail,
-    getAllUsers,
-    updateUser,
-    getUserById,
-    deleteUser
+    createProduct,
+    getAllProducts,
+    updateProduct,
+    getProductId,
+    deleteProduct
 };
 
 
