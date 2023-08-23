@@ -28,7 +28,7 @@ async function getProductId(productId) {
     try {
       const { rows: [ product ] } = await db.query(`
         SELECT * 
-        FROM product
+        FROM products
         WHERE id= $1
       `, [productId]);
   
