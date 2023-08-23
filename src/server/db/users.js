@@ -2,7 +2,7 @@ const db = require('./client')
 const bcrypt = require('bcrypt');
 const SALT_COUNT = 10;
 
-const createUser = async({ name='first last', email, password, billinginfo_id, phonenumber, isadmin}) => {
+const createUser = async({ name='first last', email, password, billinginfo_id, phonenumber, isadmin=false}) => {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     try {
         const { rows: [user ] } = await db.query(`
@@ -16,6 +16,38 @@ const createUser = async({ name='first last', email, password, billinginfo_id, p
         throw err;
     }
 }
+
+async function getAllUsers() {
+    try {
+        const { rows } = await db.query(`
+        SELECT *
+        FROM users;
+        `);
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getUserById(userId) {
+    try {
+      const { rows: [ user ] } = await db.query(`
+        SELECT * 
+        FROM users
+        WHERE id= $1
+      `, [userId]);
+  
+      if (!user) {
+        throw {
+          name: "UserNotFoundError",
+          message: "A user with that id does not exist"
+        }
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 
 const getUser = async({email, password}) => {
     if(!email || !password) {
@@ -34,6 +66,26 @@ const getUser = async({email, password}) => {
     }
 }
 
+async function updateUser(id, fields = {}) {
+    const setString = Object.keys(fields).map(
+      (key, index) => `"${ key }"=$${ index + 1 }`
+    ).join(', ');
+    if (setString.length === 0) {
+      return;
+    }
+    try {
+      const { rows: [ user ] } = await db.query(`
+        UPDATE users
+        SET ${ setString }
+        WHERE id=${ id }
+        RETURNING *;
+      `, Object.values(fields));
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 const getUserByEmail = async(email) => {
     try {
         const { rows: [ user ] } = await db.query(`
@@ -50,8 +102,22 @@ const getUserByEmail = async(email) => {
     }
 }
 
+const deleteUser = async (userId) => {
+    try {
+        await db.query(`
+        DELETE FROM users WHERE id = $1;
+        `, [userId]);
+      } catch (err) {
+        console.log(err)
+      }
+}
+
 module.exports = {
     createUser,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    getAllUsers,
+    updateUser,
+    getUserById,
+    deleteUser
 };
