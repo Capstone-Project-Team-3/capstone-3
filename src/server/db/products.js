@@ -12,16 +12,82 @@ const createProduct = async ({title, description, price, seller, availability, q
         throw err;
     }
 }
+async function getAllProducts() {
+    try {
+        const { rows } = await db.query(`
+        SELECT *
+        FROM products;
+        `);
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+}
 
+async function getProductId(productId) {
+    try {
+      const { rows: [ product ] } = await db.query(`
+        SELECT * 
+        FROM product
+        WHERE id= $1
+      `, [productId]);
+  
+      if (!product) {
+        throw {
+          name: "ProductNotFoundError",
+          message: "A product with that id does not exist"
+        }
+      }
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
 
+async function updateProduct(id, fields = {}) {
+    const setString = Object.keys(fields).map(
+      (key, index) => `"${ key }"=$${ index + 1 }`
+    ).join(', ');
+    if (setString.length === 0) {
+      return;
+    }
+    try {
+      const { rows: [ product ] } = await db.query(`
+        UPDATE products
+        SET ${ setString }
+        WHERE id=${ id }
+        RETURNING *;
+      `, Object.values(fields));
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
 
-
-
-
-
+const deleteProduct = async (productId) => {
+    try {
+        await db.query(`
+        DELETE FROM products WHERE id = $1;
+        `, [productId]);
+      } catch (err) {
+        console.log(err)
+      }
+}
 
 module.exports = {
-    createProduct
+    createUser,
+    getUser,
+    getUserByEmail,
+    getAllUsers,
+    updateUser,
+    getUserById,
+    deleteUser
 };
+
+
+
+
+
+
 
 
