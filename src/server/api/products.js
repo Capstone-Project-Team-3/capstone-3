@@ -9,8 +9,6 @@ const {
     deleteProduct
 } = require('../db');
 
-const jwt = require('jsonwebtoken')
-
 productsRouter.get('/', async( req, res, next) => {
     try {
         const products = await getAllProducts();
@@ -54,7 +52,7 @@ productsRouter.post('/newproduct', async(req, res, next) => {
     const { title, description, price, seller, quantity, category, image } = req.body;
 
     try {
-        const Product = await createProduct({
+        const product = await createProduct({
             title,
             description,
             price,
@@ -63,7 +61,7 @@ productsRouter.post('/newproduct', async(req, res, next) => {
             category,
             image
         });
-
+        return product;
         res.send({
             message: 'Created Products successful!',
             token
