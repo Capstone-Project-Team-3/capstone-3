@@ -13,7 +13,7 @@ const {
 } = require('../db');
 
 
-productsRouter.get('/', requireUser, async( req, res, next) => {
+productsRouter.get('/', async( req, res, next) => {
     try {
         const products = await getAllProducts();
 
@@ -25,7 +25,7 @@ productsRouter.get('/', requireUser, async( req, res, next) => {
     }
 });
 
-productsRouter.get('/:id', requireUser, async ( req, res, next ) => {
+productsRouter.get('/:id', async ( req, res, next ) => {
     try {
         const product = await getProductId(req.params.id);
         res.send(product)
