@@ -124,7 +124,11 @@ usersRouter.post('/register', async(req, res, next) => {
 usersRouter.delete('/:id', requireAdmin,  async (req, res, next) => {
     try {
         const deleteUsers = await deleteUser(req.params.id)
-        res.send(deleteUsers)
+        if (!deleteUsers) {
+            res.send("Deleted Successfully!")
+        } else {
+            res.send("Somthing Went Wrong... Unsuccessfull!")
+        }
     } catch(err) {
         next(err)
     }

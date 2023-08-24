@@ -18,7 +18,6 @@ apiRouter.use(async (req, res, next) => {
     const token = auth.slice(prefix.length);
     try {
       const { id } = jwt.verify(token, JWT_SECRET);
-      console.log(id)
       if (id) {
         req.user = await getUserById(id);
         next();
@@ -38,9 +37,11 @@ apiRouter.use(async (req, res, next) => {
 const usersRouter = require('./users');
 const productsRouter = require('./products')
 const billinginfosRouter = require ('./billinginfo')
+const ordersRouter = require ('./orders')
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/products',productsRouter)
 apiRouter.use('/billinginfos', billinginfosRouter )
+apiRouter.use('/orders', ordersRouter )
 apiRouter.use((err, req, res, next) => {
     res.status(500).send(err)
   })

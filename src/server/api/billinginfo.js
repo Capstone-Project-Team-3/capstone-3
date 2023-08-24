@@ -9,7 +9,6 @@ const {
     deleteBillingInfo
 } = require('../db');
 
-const jwt = require('jsonwebtoken')
 
 
 billinginfosRouter.get('/:id', requireUser, async ( req, res, next ) => {
@@ -50,7 +49,7 @@ billinginfosRouter.post('/', async(req, res, next) => {
             shippingAddress
         });
         res.send({
-            message: 'A test withdrawl of $10,000 has been posted to your account.',
+            message: 'Successfully Added New Billing Info!',
         });
         return billinginfo;
     } catch({name, message}) {
@@ -61,7 +60,11 @@ billinginfosRouter.post('/', async(req, res, next) => {
 billinginfosRouter.delete('/:id', requireUser,  async (req, res, next) => {
     try {
         const deletebillinginfo = await deleteBillingInfo(req.params.id)
-        res.send(deletebillinginfo)
+        if (!deletebillinginfo) {
+            res.send("Deleted Successfully!")
+        } else {
+            res.send("Unsuccessfull... Something went Wrong!")
+        }
     } catch(err) {
         next(err)
     }

@@ -314,7 +314,7 @@ const createTables = async () => {
     
 
         await db.query(`
-        CREATE TYPE statustype as ENUM ('processing', 'shipped', 'delivered');
+        CREATE TYPE statustype as ENUM ('processing', 'shipped', 'delivered', 'inCart');
         CREATE TABLE orders(
           id SERIAL PRIMARY KEY,
           user_id INTEGER REFERENCES users(id),
