@@ -1,5 +1,8 @@
 const express = require('express')
 const productsRouter = express.Router();
+const { requireUser, requireAdmin} = require('./utils');
+
+
 
 const {
     createProduct,
@@ -9,7 +12,8 @@ const {
     deleteProduct
 } = require('../db');
 
-productsRouter.get('/', async( req, res, next) => {
+
+productsRouter.get('/', requireUser, async( req, res, next) => {
     try {
         const products = await getAllProducts();
 
@@ -21,7 +25,7 @@ productsRouter.get('/', async( req, res, next) => {
     }
 });
 
-productsRouter.get('/:id', async ( req, res, next ) => {
+productsRouter.get('/:id', requireUser, async ( req, res, next ) => {
     try {
         const product = await getProductId(req.params.id);
         res.send(product)
@@ -30,7 +34,7 @@ productsRouter.get('/:id', async ( req, res, next ) => {
     }
 });
 
-productsRouter.patch('/:id', async (req, res, next) => {
+productsRouter.patch('/:id', requireAdmin, async (req, res, next) => {
     try {
         const product = await updateProduct(req.params.id, req.body)
         if(product) {
@@ -48,7 +52,7 @@ productsRouter.patch('/:id', async (req, res, next) => {
 });
 
 
-productsRouter.post('/newproduct', async(req, res, next) => {
+productsRouter.post('/newproduct', requireAdmin, async(req, res, next) => {
     const { title, description, price, seller, quantity, category, image } = req.body;
 
     try {
@@ -70,13 +74,14 @@ productsRouter.post('/newproduct', async(req, res, next) => {
     }
 })
 
-productsRouter.delete('/:id', async (req, res, next) => {
+productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
     try {
         const deleteProducts = await deleteProduct(req.params.id)
-        // res.send({
-        //     message: "Deleted Succussefully!"
-        // });
-        res.send(deleteProducts)
+        if (!deleteProducts) {
+            res.send("Oops not deleted lol")
+        } else {
+            res.send("Deleted!")
+        }
     } catch(err) {
         console.log(err)
     }
