@@ -37,7 +37,7 @@ apiRouter.use(async (req, res, next) => {
 
 const usersRouter = require('./users');
 const productsRouter = require('./products')
-const billinginfosRouter = requre ('./billinginfos')
+const billinginfosRouter = require ('./billinginfo')
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/products',productsRouter)
 apiRouter.use('/billinginfos', billinginfosRouter )
