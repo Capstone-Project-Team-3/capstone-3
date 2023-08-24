@@ -51,7 +51,6 @@ productsRouter.patch('/:id', requireAdmin, async (req, res, next) => {
     }
 });
 
-
 productsRouter.post('/newproduct', requireAdmin, async(req, res, next) => {
     const { title, description, price, seller, quantity, category, image } = req.body;
 
@@ -78,9 +77,9 @@ productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
     try {
         const deleteProducts = await deleteProduct(req.params.id)
         if (!deleteProducts) {
-            res.send("Oops not deleted lol")
+            res.send("Deleted Successfully!")
         } else {
-            res.send("Deleted!")
+            res.send("Somthing Went Wrong... Unsuccessfull!")
         }
     } catch(err) {
         console.log(err)

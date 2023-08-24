@@ -1,5 +1,8 @@
 const db = require('./client')
 
+
+
+
 const createBillingInfos = async ({paymenttype, cardnum, createdAt, billingAddress, shippingAddress}) => {
     try {
      const { rows: [ billinginfo ] } = await db.query(`
@@ -12,21 +15,21 @@ const createBillingInfos = async ({paymenttype, cardnum, createdAt, billingAddre
     }
 }
 
-async function getBillingInfoById(billinginfo_Id) {
+async function getBillingInfoById(id) {
     try {
-      const { rows: [ billinginfo_Id ] } = await db.query(`
+      const { rows: [ billing ] } = await db.query(`
         SELECT * 
         FROM billinginfos
         WHERE id= $1
-      `, [billinginfo_Id]);
+      `, [id]);
   
-      if (!billinginfo_Id) {
+      if (!id) {
         throw {
           name: "BillingInfoNotFoundError",
           message: "Sorry, unable to retrieve billing info"
         }
       }
-      return billinginfo_Id;
+      return billing;
     } catch (error) {
       throw error;
     }
