@@ -12,6 +12,7 @@ const createProduct = async ({title, description, price, seller, availability, q
         throw err;
     }
 }
+
 async function getAllProducts() {
     try {
         const { rows } = await db.query(`

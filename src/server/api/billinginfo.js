@@ -1,6 +1,6 @@
 const express = require('express')
 const billinginfosRouter = express.Router();
-const { requireUser, requireAdmin } = require('./utils');
+const { requireUser } = require('./utils');
 
 const {
     createBillingInfos,
@@ -49,10 +49,10 @@ billinginfosRouter.post('/', async(req, res, next) => {
             billingAddress,
             shippingAddress
         });
-
         res.send({
             message: 'A test withdrawl of $10,000 has been posted to your account.',
         });
+        return billinginfo;
     } catch({name, message}) {
         next({name, message})
     }

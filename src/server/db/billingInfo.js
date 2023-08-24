@@ -66,5 +66,8 @@ const deleteBillingInfo = async (billinginfo_Id) => {
 
 
 module.exports = {
-    createBillingInfos
+    createBillingInfos,
+    getBillingInfoById,
+    updateBillingInfo,
+    deleteBillingInfo
 };
