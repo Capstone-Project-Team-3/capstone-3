@@ -122,11 +122,3 @@ module.exports = {
     deleteUser
 };
 
-// ------Starter code for running a check to make sure user can only access their own data------
-// try {
-//     const requestedUserId = req.params.id;
-
-//     if (requestedUserId !== req.userId) {
-//       return res.status(403).send('Access denied'); // User is trying to access another user's data
-//     }
-// ----------------

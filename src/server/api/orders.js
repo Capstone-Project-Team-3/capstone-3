@@ -6,7 +6,7 @@ const {
     createOrder,
     getOrderId,
     updateOrder,
-    deleteOrder
+    // deleteOrder
 } = require('../db');
 
 
@@ -55,17 +55,17 @@ ordersRouter.patch('/:id', async (req, res, next) => {
     }
 });
 
-ordersRouter.delete('/:id', async (req, res, next) => {
-    try {
-        const order = await deleteOrder(req.params.id)
-        if (!order) {
-            res.send("Deleted Successfully!")
-        } else {
-            res.send("Somthing Went Wrong... Unsuccessfull!")
-        }
-    } catch(err) {
-        console.log(err)
-    }
-});
+// ordersRouter.delete('/:id', async (req, res, next) => {
+//     try {
+//         const order = await deleteOrder(req.params.id)
+//         if (!order) {
+//             res.send("Deleted Successfully!")
+//         } else {
+//             res.send("Somthing Went Wrong... Unsuccessfull!")
+//         }
+//     } catch(err) {
+//         console.log(err)
+//     }
+// });
 
 module.exports = ordersRouter;

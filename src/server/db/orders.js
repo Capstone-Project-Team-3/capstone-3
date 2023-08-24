@@ -53,19 +53,19 @@ async function getOrderId(id) {
     }
   }
 
-  const deleteOrder = async (id) => {
-    try {
-        await db.query(`
-        DELETE FROM orders WHERE id = $1;
-        `, [id]);
-      } catch (err) {
-        console.log(err)
-      }
-}
+//   const deleteOrder = async (id) => {
+//     try {
+//         await db.query(`
+//         DELETE FROM orders WHERE id = $1;
+//         `, [id]);
+//       } catch (err) {
+//         console.log(err)
+//       }
+// }
 
 module.exports = {
     createOrder,
     getOrderId,
     updateOrder,
-    deleteOrder
+    // deleteOrder
 };
