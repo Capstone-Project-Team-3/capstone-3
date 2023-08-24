@@ -1,5 +1,6 @@
 const express = require('express')
 const usersRouter = express.Router();
+const { requireUser, requireAdmin } = require('./utils');
 
 const {
     createUser,
@@ -13,7 +14,7 @@ const {
 
 const jwt = require('jsonwebtoken')
 
-usersRouter.get('/', async( req, res, next) => {
+usersRouter.get('/', requireAdmin, async( req, res, next) => {
     try {
         const users = await getAllUsers();
 
@@ -25,7 +26,7 @@ usersRouter.get('/', async( req, res, next) => {
     }
 });
 
-usersRouter.get('/:id', async ( req, res, next ) => {
+usersRouter.get('/:id', requireUser, async ( req, res, next ) => {
     try {
         const user = await getUserById(req.params.id);
         res.send({user})
@@ -34,7 +35,7 @@ usersRouter.get('/:id', async ( req, res, next ) => {
     }
 });
 
-usersRouter.patch('/:id', async (req, res, next) => {
+usersRouter.patch('/:id', requireUser, async (req, res, next) => {
     try {
         const user = await updateUser(req.params.id, req.body)
         if(user) {
@@ -120,7 +121,7 @@ usersRouter.post('/register', async(req, res, next) => {
     }
 })
 
-usersRouter.delete('/:id', async (req, res, next) => {
+usersRouter.delete('/:id', requireAdmin,  async (req, res, next) => {
     try {
         const deleteUsers = await deleteUser(req.params.id)
         res.send(deleteUsers)
