@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import Login from './components/Login';
+import Products  from './components/Products'
+import { Routes, Route} from 'react-router-dom'
+import SingleProduct from './components/SingleProduct';
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <div className='App'>
-        <h1>Boilerplate</h1>
-        <img id='comp-img' src='./computer.png'></img>
-        <p>Replace the starter code in this template with something cool</p>
-        <Login />
+    <div>
+      <Routes>
+        <Route path='/login' element={ <Login /> } />
+        <Route path='/' element={ <Products /> } />
+        <Route path='/:id' element={ <SingleProduct /> } />
+      </Routes>
     </div>
   );
 }
