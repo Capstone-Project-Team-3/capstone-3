@@ -10,7 +10,7 @@ const {
 } = require('../db');
 
 
-ordersRouter.post('/neworder',  async(req, res, next) => {
+ordersRouter.post('/neworder', requireUser,  async(req, res, next) => {
     const { user_id, total, billinginfo_id, createdAt, status } = req.body;
     try {
         const order = await createOrder({
@@ -29,7 +29,7 @@ ordersRouter.post('/neworder',  async(req, res, next) => {
     }
 })
 
-ordersRouter.get('/:id', async ( req, res, next ) => {
+ordersRouter.get('/:id', requireUser, async ( req, res, next ) => {
     try {
         const order = await getOrderId(req.params.id);
         res.send(order)
@@ -38,7 +38,7 @@ ordersRouter.get('/:id', async ( req, res, next ) => {
     }
 });
 
-ordersRouter.patch('/:id', async (req, res, next) => {
+ordersRouter.patch('/:id', requireUser, async (req, res, next) => {
     try {
         const order = await updateOrder(req.params.id, req.body)
         if(order) {

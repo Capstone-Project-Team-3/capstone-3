@@ -31,14 +31,7 @@ usersRouter.get('/', requireAdmin, async( req, res, next) => {
 usersRouter.get('/:id', requireUser, async ( req, res, next ) => {
     try {
         const user = await getUserById(req.params.id);
-            const prefix = 'Bearer ';
-            const auth = req.header('Authorization');
         const requestedUserId = req.params.id;
-        // const token = auth.slice(prefix.length);
-        // const { id } = jwt.verify(token, JWT_SECRET);
-                // console.log(id)
-                console.log(requestedUserId)
-
         if (requestedUserId != req.user.id) {
         return res.status(403).send('Access denied');
         } 
