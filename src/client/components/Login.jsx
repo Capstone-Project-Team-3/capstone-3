@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({setToken, setUser}) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -15,6 +17,7 @@ const Login = () => {
 
   const login = async() => {
     try {
+      // e.preventDefault()
         const response = await fetch('http://localhost:3000/api/users/login', {
             method: 'POST',
             headers: {
@@ -26,7 +29,9 @@ const Login = () => {
             })
         });
         const result = await response.json();
-        setMessage(result.message);
+        setToken(result.token);
+        setUser(result.user)
+        console.log(result.token)
         if(!response.ok) {
           throw(result)
         }
@@ -66,7 +71,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type='submit'>Login</button>
+        <button type='submit' onClick={() => navigate('/users/myprofile')}>Login</button>
       </form>
       <p>{message}</p>
     </div>
