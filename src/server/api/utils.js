@@ -6,7 +6,7 @@ function requireUser(req, res, next) {
         message: "You must be logged in to perform this action"
       });
     }
-    next();
+    else {next();}
   }
   
   function requireAdmin(req, res, next) {
@@ -17,7 +17,7 @@ function requireUser(req, res, next) {
         message: "You must be a admin to perform this action"
       });
     }
-    next();
+    else {next();}
   }
   module.exports = {
     requireUser,

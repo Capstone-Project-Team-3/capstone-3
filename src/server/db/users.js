@@ -34,7 +34,7 @@ async function getUserById(userId) {
       const { rows: [ user ] } = await db.query(`
         SELECT * 
         FROM users
-        WHERE id= $1
+        WHERE id= $1 
       `, [userId]);
   
       if (!user) {
@@ -48,6 +48,8 @@ async function getUserById(userId) {
       throw error;
     }
   }
+
+  
 
 const getUser = async({email, password}) => {
     if(!email || !password) {
