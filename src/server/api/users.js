@@ -31,11 +31,14 @@ usersRouter.get('/', requireAdmin, async( req, res, next) => {
 usersRouter.get('/:id', requireUser, async ( req, res, next ) => {
     try {
         const user = await getUserById(req.params.id);
+        const admin = (req.user.isadmin);
         const requestedUserId = req.params.id;
-        if (requestedUserId != req.user.id) {
-        return res.status(403).send('Access denied');
+
+        if (requestedUserId == req.user.id || admin) {
+        return res.send({user});
         } 
-        res.send({user})
+        else res.status(403).send('Access denied')
+
     } catch({name, message}) {
         next ({name, message})
     }
