@@ -29,9 +29,9 @@ fetchAllProducts()
   return (
     <div>
         {
-        products.map((p) => <div key={p.id} onClick={() => navigate(`/${p.id}`)}> 
+        products.map((p) => <div key={p.id} onClick={() => navigate(`/products/${p.id}`)}> 
         <h2>{p.title}</h2>
-        {/* <img src={p.image} /> */}
+        <img src={p.image} />
         <h4>description: {p.description}</h4>
         <h4>price: ${p.price}</h4> 
         <h4>seller: {p.seller}</h4>

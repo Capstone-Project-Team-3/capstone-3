@@ -4,25 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const URL = `http://localhost:3000/api/` 
 
-const Profile = () => {
-  const { id } = useParams();
-  const [user, setUser] = useState(null);
+const Profile = ({user}) => {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch(`${URL}users/${id}`);
-        const data = await response.json();
-        setUser(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchUser();
-  }, []);
-
   return (
     <div className="user-profile">
       <h1>User Profile</h1>
@@ -31,11 +14,10 @@ const Profile = () => {
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
             <p>Phone Number: {user.phonenumber}</p>
-            <button onClick={() => navigate('/')}>Go Back</button>
-    
+            <button onClick={() => navigate('/')}>Back To Products</button>
+            <button onClick={() => navigate('/mybillinginfo')}>Billing Info</button>
           </div>
         </div>
-
     </div>
   );
 };
