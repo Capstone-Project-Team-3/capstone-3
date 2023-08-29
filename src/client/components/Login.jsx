@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Login = ({setToken, setUser}) => {
   const navigate = useNavigate()
@@ -29,6 +29,8 @@ const Login = ({setToken, setUser}) => {
             })
         });
         const result = await response.json();
+        sessionStorage.setItem('token',result.token)
+        sessionStorage.setItem('userSS', JSON.stringify(result.user))
         setToken(result.token);
         setUser(result.user)
         console.log(result.token)
@@ -44,6 +46,8 @@ const Login = ({setToken, setUser}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate('/users/myprofile');
+
     login();
   };
 
@@ -71,8 +75,9 @@ const Login = ({setToken, setUser}) => {
             required
           />
         </div>
-        <button type='submit' onClick={() => navigate('/users/myprofile')}>Login</button>
+        <button type='submit'>Login</button>
       </form>
+      <Link to='/register'>Don't have an account? Register here</Link>
       <p>{message}</p>
     </div>
   );

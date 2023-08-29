@@ -4,8 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const URL = `http://localhost:3000/api/` 
 
-const Profile = ({user}) => {
+const Profile = () => {
   const navigate = useNavigate()
+  const user =  JSON.parse(sessionStorage.getItem('userSS'))
+  console.log(user)
   return (
     <div className="user-profile">
       <h1>User Profile</h1>
