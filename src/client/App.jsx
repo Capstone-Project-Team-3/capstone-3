@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Profile from './components/Profile';
 import { useState } from 'react';
 import BillingInfo from './components/BillingInfo';
+import Register from './components/Register';
 
 function App() {
   const [token, setToken] = useState(null)
@@ -18,8 +19,9 @@ function App() {
         <Route path='/login' element={ <Login setToken={setToken} setUser={setUser} token={token}/> } />
         <Route path='/' element={ <Products token={token}/> } />
         <Route path='/products/:id' element={ <SingleProduct token={token}/> } />
-        <Route path='/users/myprofile' element={ <Profile token={token}  user={user} /> } />
-        <Route path='/mybillinginfo' element={ <BillingInfo token={token}  user={user} /> } />
+        <Route path='/users/myprofile' element={ <Profile token={token}/> } />
+        <Route path='/mybillinginfo' element={ <BillingInfo/> } />
+        <Route path='/register' element={ <Register token={token}  user={user} /> } />
       </Routes>
     </div>
   );

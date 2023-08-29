@@ -4,14 +4,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const URL = `http://localhost:3000/api/` 
 
-const BillingInfo = ({token, user}) => {
+const BillingInfo = () => {
   const [info, setInfo] = useState('');
+  const user =  JSON.parse(sessionStorage.getItem('userSS'))
+  const token = sessionStorage.getItem('token')
   const id = user.billinginfo_id
+  console.log(id)
   const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchBI() {
       try {
+        console.log(id)
+        console.log(token)
         const response = await fetch(`${URL}billinginfos/${id}`,{
         headers: {
             'Content-Type': 'application/json',
@@ -20,13 +25,14 @@ const BillingInfo = ({token, user}) => {
         const data = await response.json();
         console.log(data.billinginfo)
         setInfo(data.billinginfo);
+        console.log(info)
       } catch (error) {
         console.error(error);
       }
     }
 
     fetchBI();
-  }, []);
+    }, []);
 
   return (
     <div className="billing-info">
