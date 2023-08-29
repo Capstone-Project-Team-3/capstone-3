@@ -1,4 +1,4 @@
-#  🚀 Capstone Boilerplate
+One Stop Shop!
 
 A template for building web applications using the PERN (PostgreSQL, Express.js, React, Node.js) stack. 
 
