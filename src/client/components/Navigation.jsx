@@ -1,15 +1,17 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
-function Navigation({user}) {
+function Navigation({token, user}) {
   const { id } = useParams()
+  const navigate = useNavigate()
+  console.log(token)
   return (
     <div>
         <h1> One Stop Shop </h1>
         <Link to='/'> Products </Link>
         <Link to='/login'> Login </Link>
         {/* <Link to='/cart'> Cart </Link> */}
-       <Link to={`/users/myprofile`}> Profile </Link> 
+        { token ? <Link to={`/users/myprofile`}> Profile </Link> : navigate('/login') }
     </div>
   )
 }

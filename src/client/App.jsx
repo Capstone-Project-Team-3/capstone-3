@@ -14,12 +14,12 @@ function App() {
 
   return (
     <div>
-      <Navigation />
+      <Navigation token={token} user={user}/>
       <Routes>
         <Route path='/login' element={ <Login setToken={setToken} setUser={setUser} token={token}/> } />
         <Route path='/' element={ <Products token={token}/> } />
         <Route path='/products/:id' element={ <SingleProduct token={token}/> } />
-        <Route path='/users/myprofile' element={ <Profile token={token}/> } />
+        <Route path='/users/myprofile' element={<Profile token={token} /> } />
         <Route path='/mybillinginfo' element={ <BillingInfo/> } />
         <Route path='/register' element={ <Register token={token}  user={user} /> } />
       </Routes>

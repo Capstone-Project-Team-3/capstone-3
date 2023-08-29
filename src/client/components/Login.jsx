@@ -33,7 +33,7 @@ const Login = ({setToken, setUser}) => {
         sessionStorage.setItem('userSS', JSON.stringify(result.user))
         setToken(result.token);
         setUser(result.user)
-        console.log(result.token)
+        console.log('token:',result.token)
         if(!response.ok) {
           throw(result)
         }
