@@ -9,14 +9,11 @@ const BillingInfo = () => {
   const user =  JSON.parse(sessionStorage.getItem('userSS'))
   const token = sessionStorage.getItem('token')
   const id = user.billinginfo_id
-  console.log(id)
   const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchBI() {
       try {
-        console.log(id)
-        console.log(token)
         const response = await fetch(`${URL}billinginfos/${id}`,{
         headers: {
             'Content-Type': 'application/json',
@@ -25,7 +22,6 @@ const BillingInfo = () => {
         const data = await response.json();
         console.log(data.billinginfo)
         setInfo(data.billinginfo);
-        console.log(info)
       } catch (error) {
         console.error(error);
       }
