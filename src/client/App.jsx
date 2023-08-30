@@ -29,13 +29,13 @@ function App() {
       <Navigation token={token} user={user}/>
       <Routes>
         <Route path='/login' element={ <Login token={token}/> } />
-        <Route path='/' element={ <Products token={token}/> } />
-        <Route path='/products/:id' element={ <SingleProduct token={token}/> } />
+        <Route path='/' element={ <Products token={token} /> } />
+        <Route path='/products/:id' element={ <SingleProduct token={token} user={user}/> } />
         <Route path='/users/myprofile' element={<Profile token={token} user={user} /> } />
         <Route path='/mybillinginfo' element={ <BillingInfo token={token} user={user} /> } />
-        <Route path='/register' element={ <Register token={token}  user={user} /> } />
-        <Route path='/users/editbillinginfo' element={ <EditBilling token={token} /> } />
-        <Route path='/editmyprofile' element={ <EditProfile token={token} /> } />
+        <Route path='/register' element={ <Register /> } />
+        <Route path='/users/editbillinginfo' element={ <EditBilling token={token} user={user} /> } />
+        <Route path='/editmyprofile' element={ <EditProfile token={token} user={user} /> } />
       </Routes>
     </div>
   );
