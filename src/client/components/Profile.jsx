@@ -24,6 +24,7 @@ const Profile = () => {
             <p>Phone Number: {user.phonenumber}</p>
             <button onClick={() => navigate('/')}>Back To Products</button>
             <button onClick={() => navigate('/mybillinginfo')}>Billing Info</button>
+            <button onClick={() => navigate('/editmyprofile')}>Edit Profile</button>
             <button onClick={() => handleLogOut()}> Log Out </button>
           </div>
         </div>

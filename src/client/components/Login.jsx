@@ -44,10 +44,8 @@ const Login = ({setToken, setUser}) => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/users/myprofile');
-
     login();
   };
 

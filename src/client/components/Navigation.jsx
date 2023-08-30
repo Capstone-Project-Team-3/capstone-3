@@ -11,7 +11,7 @@ function Navigation({token, user}) {
         <Link to='/'> Products </Link>
         <Link to='/login'> Login </Link>
         {/* <Link to='/cart'> Cart </Link> */}
-        { token ? <Link to={`/users/myprofile`}> Profile </Link> : navigate('/login') }
+        { token ? <Link to={`/users/myprofile`}> Profile </Link> : null }
     </div>
   )
 }
