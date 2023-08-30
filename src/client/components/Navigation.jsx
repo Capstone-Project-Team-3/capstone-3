@@ -12,8 +12,9 @@ function Navigation() {
         <h1> One Stop Shop </h1>
         <Link to='/'> Products </Link>
         { !user ? <Link to='/login'> Login </Link> : null }
-        {/* <Link to='/cart'> Cart </Link> */}
-        { user ? <Link to={`/users/myprofile`}> Profile </Link> : null }
+        {/* <Link to='/cart'> Cart </Link> */
+    { user ? <Link to={`/users/myprofile`}> Profile </Link> : null }
+
     </div>
   )
 }

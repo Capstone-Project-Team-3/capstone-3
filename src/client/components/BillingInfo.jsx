@@ -41,6 +41,7 @@ const BillingInfo = () => {
             <p>Billing Address: {info.billingaddress}</p>
             <p>Shipping Address: {info.shippingaddress}</p>
             <button onClick={() => navigate('/users/myprofile')}>Back</button>
+            <button onClick={() => navigate('/users/editbillinginfo')}> Edit Billing Info</button>
           </div>
         </div>
     </div>
