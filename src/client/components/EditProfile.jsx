@@ -4,16 +4,17 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 
 const URL = `http://localhost:3000/api/` 
 
-function EditProfile({token}) {
+function EditProfile({token, user}) {
     const navigate = useNavigate()
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const user =  JSON.parse(sessionStorage.getItem('userSS'))
-    const id = user.billinginfo_id
+    const userparsed =  JSON.parse(user)
+    const id = userparsed.id
     
 async function handleSubmit(e) {
     e.preventDefault();
+    console.log(id)
     try {
         const response = await fetch(`${URL}users/${id}`, {
             method: "PATCH",
@@ -22,11 +23,9 @@ async function handleSubmit(e) {
               'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-              profileInfo: {
                 name,
                 email,
-                phoneNumber
-              }
+                phonenumber:phoneNumber
             })
           });
           const data = await response.json()

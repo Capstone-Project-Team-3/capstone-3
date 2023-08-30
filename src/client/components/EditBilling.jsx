@@ -4,14 +4,14 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 
 const URL = `http://localhost:3000/api/` 
 
-function EditBilling({token}) {
+function EditBilling({token, user}) {
 const navigate = useNavigate()
 const [paymentType, setPaymentType] = useState('');
 const [cardNum, setCardNum] = useState('')
 const [billingAddress, setBillingAddress] = useState('')
 const [shippingAddress, setShippingAddress] = useState('')
-const user =  JSON.parse(sessionStorage.getItem('userSS'))
-const id = user.billinginfo_id
+const userparsed =  JSON.parse(user)
+const id = userparsed.billinginfo_id
 
 
 
@@ -25,12 +25,10 @@ async function handleSubmit(e) {
               'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-              billinginfo: {
-                paymentType,
-                cardNum,
-                billingAddress,
-                shippingAddress
-              }
+                paymenttype:paymentType,
+                cardnum:cardNum,
+                billingaddress:billingAddress,
+                shippingaddress:shippingAddress
             })
           });
           const data = await response.json()
