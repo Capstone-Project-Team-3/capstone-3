@@ -6,7 +6,7 @@ const URL = `http://localhost:3000/api/`
 
 const Profile = ({user}) => {
   const navigate = useNavigate()
-  const userparsed =  JSON.parse(user)
+  // const userparsed =  JSON.parse(user)
   console.log(user)
 
   const handleLogOut = () => {
@@ -18,9 +18,9 @@ const Profile = ({user}) => {
       <h1>User Profile</h1>
         <div>
           <div className="user-info">
-            <p>Name: {userparsed.name}</p>
-            <p>Email: {userparsed.email}</p>
-            <p>Phone Number: {userparsed.phonenumber}</p>
+            <p>Name: {user?.name}</p>
+            <p>Email: {user?.email}</p>
+            <p>Phone Number: {user?.phonenumber}</p>
             <button onClick={() => navigate('/')}>Back To Products</button>
             <button onClick={() => navigate('/mybillinginfo')}>Billing Info</button>
             <button onClick={() => navigate('/editmyprofile')}>Edit Profile</button>

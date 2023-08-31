@@ -10,9 +10,8 @@ const [paymentType, setPaymentType] = useState('');
 const [cardNum, setCardNum] = useState('')
 const [billingAddress, setBillingAddress] = useState('')
 const [shippingAddress, setShippingAddress] = useState('')
-const userparsed =  JSON.parse(user)
-const id = userparsed.billinginfo_id
-
+const id = user.billinginfo_id
+console.log(id)
 
 
 async function handleSubmit(e) {
