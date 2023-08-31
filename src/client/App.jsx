@@ -19,7 +19,7 @@ function App() {
     const sessiontoken = sessionStorage.getItem('token')
     const sessionuser = sessionStorage.getItem('userSS')
     setToken(sessiontoken),
-    setUser(sessionuser)
+    setUser(JSON.parse(sessionuser))
   }, [])
   
 
@@ -29,7 +29,7 @@ function App() {
     <div>
       <Navigation token={token} user={user}/>
       <Routes>
-        <Route path='/login' element={ <Login token={token}/> } />
+        <Route path='/login' element={ <Login setToken={setToken} setUser={setUser} token={token}/> } />
         <Route path='/' element={ <Products token={token} /> } />
         <Route path='/products/:id' element={ <SingleProduct token={token} user={user}/> } />
         <Route path='/users/myprofile' element={<Profile token={token} user={user} /> } />
