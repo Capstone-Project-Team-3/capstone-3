@@ -9,9 +9,8 @@ function EditProfile({token, user}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const userparsed =  JSON.parse(user)
-    const id = userparsed.id
-    
+    const id = user.id
+    console.log(id)    
 async function handleSubmit(e) {
     e.preventDefault();
     console.log(id)

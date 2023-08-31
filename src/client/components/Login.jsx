@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({setToken, setUser}) => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,10 +31,13 @@ const Login = () => {
         const result = await response.json();
         sessionStorage.setItem('token',result.token)
         sessionStorage.setItem('userSS', JSON.stringify(result.user))
+        setToken(result.token);
+        setUser(result.user);
         console.log('token:',result.token)
         if(!response.ok) {
           throw(result)
         }
+        navigate('/users/myprofile')
         setEmail('');
         setPassword('');
     } catch (err) {
@@ -44,8 +47,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/users/myprofile')
     login();
+
   };
 
   return (
