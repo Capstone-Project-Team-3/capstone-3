@@ -14,6 +14,7 @@ function Navigation() {
         { !user ? <Link to='/login'> Login </Link> : null }
         {/* <Link to='/cart'> Cart </Link> */}
     { user ? <Link to={`/users/myprofile`}> Profile </Link> : null }
+        <Link to='/mycart'> My Cart </Link>
 
     </div>
   )

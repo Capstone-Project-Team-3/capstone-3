@@ -33,6 +33,26 @@ async function getOrderId(id) {
     }
   }
 
+async function getOrderUserId(user_id) {
+  try {
+    const { rows: [ order ] } = await db.query(`
+      SELECT * 
+      FROM orders
+      WHERE user_id= $1
+    `, [user_id]);
+
+    if (!order) {
+      throw {
+        name: "CartNotFoundError",
+        message: "You do not currently have any items in your cart"
+      }
+    }
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
   async function updateOrder(id, fields = {}) {
     const setString = Object.keys(fields).map(
       (key, index) => `"${ key }"=$${ index + 1 }`
@@ -66,6 +86,7 @@ async function getOrderId(id) {
 module.exports = {
     createOrder,
     getOrderId,
+    getOrderUserId,
     updateOrder,
     // deleteOrder
 };

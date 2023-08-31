@@ -38,10 +38,12 @@ const usersRouter = require('./users');
 const productsRouter = require('./products')
 const billinginfosRouter = require ('./billinginfo')
 const ordersRouter = require ('./orders')
+const productordersRouter = require ('./productOrders')
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/products',productsRouter)
 apiRouter.use('/billinginfos', billinginfosRouter )
 apiRouter.use('/orders', ordersRouter )
+apiRouter.use('/productorders', productordersRouter )
 apiRouter.use((err, req, res, next) => {
     res.status(500).send(err)
   })

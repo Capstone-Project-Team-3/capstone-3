@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 
 const Login = ({setToken, setUser}) => {
@@ -6,18 +6,19 @@ const Login = ({setToken, setUser}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-
+  
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
+  
   const login = async() => {
     try {
       // e.preventDefault()
+
         const response = await fetch('http://localhost:3000/api/users/login', {
             method: 'POST',
             headers: {
@@ -41,7 +42,7 @@ const Login = ({setToken, setUser}) => {
         setEmail('');
         setPassword('');
     } catch (err) {
-        console.error(`${err.name}: ${err.message}`);
+      console.error(`${err.name}: ${err.message}`);
     }
   }
 
