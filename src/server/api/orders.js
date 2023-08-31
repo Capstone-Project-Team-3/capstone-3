@@ -5,6 +5,7 @@ const { requireUser, requireAdmin } = require('./utils');
 const {
     createOrder,
     getOrderId,
+    getOrderUserId,
     updateOrder,
     // deleteOrder
 } = require('../db');
@@ -29,9 +30,19 @@ ordersRouter.post('/neworder', requireUser,  async(req, res, next) => {
     }
 })
 
-ordersRouter.get('/:id', requireUser, async ( req, res, next ) => {
+// ordersRouter.get('/:id', requireUser, async ( req, res, next ) => {
+//     try {
+//         const order = await getOrderId(req.params.id);
+//         res.send(order)
+//     } catch({name, message}) {
+//         next ({name, message})
+//     }
+// });
+
+
+ordersRouter.get('/:id', async ( req, res, next ) => {
     try {
-        const order = await getOrderId(req.params.id);
+        const order = await getOrderUserId(req.params.id);
         res.send(order)
     } catch({name, message}) {
         next ({name, message})

@@ -12,6 +12,27 @@ const createProductOrder = async ({product_id, quantity, order_id, createdAt, mo
     }
 }
 
+async function getProductOrderByOrderId(order_id) {
+    try {
+      const { rows:  productOrders  } = await db.query(`
+        SELECT *
+        FROM product_orders
+        WHERE order_id= $1
+      `, [order_id]);
+  
+      if (!productOrders) {
+        throw {
+          name: "CartNotFoundError",
+          message: "You do not currently have any items in your cart"
+        }
+      }
+      return productOrders;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 module.exports = {
-    createProductOrder
+    createProductOrder,
+    getProductOrderByOrderId,
 };
