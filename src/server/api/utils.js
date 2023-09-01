@@ -10,6 +10,7 @@ function requireUser(req, res, next) {
   }
   
   function requireAdmin(req, res, next) {
+    console.log('requireAdmin', req.user)
     if(!req.user.isadmin) {
       res.status(401);
       next({

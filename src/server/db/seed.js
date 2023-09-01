@@ -12,7 +12,7 @@ const users = [
     password: 'securepass',
     billinginfo_id: 1,
     phonenumber: '6184536888',
-    isadmin: false
+    isadmin: true
   },
   {
     name: 'Liu Wei',

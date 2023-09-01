@@ -5,9 +5,11 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 const URL = `http://localhost:3000/api/` 
 
 
-function SingleProduct() {
+function SingleProduct({user}) {
 const { id } = useParams()
 const [singleProduct, setSingleProduct] = useState([])
+const [orderid, setOrderid] = useState('');
+// const isadmin = user.isadmin
 const navigate = useNavigate()
 
 
@@ -25,6 +27,33 @@ useEffect(() => {
 }, [])
 
 
+useEffect(() => {
+  const deleteProduct = async () => {
+    try { 
+        const response = await fetch(`${URL}products/${id}`,
+        {
+          method: 'DELETE',
+        });
+        const result = await response.json();
+        console.log(result);
+       }  
+     catch (err) {
+        console.error(
+            `Whoops, trouble removing item from the site!`,
+            err
+        );
+    }
+  };
+  deleteProduct()
+}, [])
+
+
+async function handleDeleteProduct(e) {
+  e.preventDefault();
+  navigate('/');
+  deleteProduct();
+}
+
   return (
     <div>
      {
@@ -35,6 +64,7 @@ useEffect(() => {
         <h4>price: ${singleProduct.price}</h4> 
         <h4>seller: {singleProduct.seller}</h4>
         <button onClick={() => navigate('/')}>Go Back</button>
+        {/* { isadmin ? <button onClick={handleDeleteProduct}>Delete Product</button> : null } */}
         </div>
      }   
     </div>

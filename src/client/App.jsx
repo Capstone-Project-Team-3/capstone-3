@@ -10,6 +10,9 @@ import Register from './components/Register';
 import EditBilling from './components/EditBilling';
 import EditProfile from './components/EditProfile';
 import Cart from './components/Cart';
+import AdminMenu from './components/AdminMenu';
+import AdminNewproduct from './components/AdminNewproduct';
+import AdminEditProduct from './components/AdminEditProduct';
 
 function App() {
   const [token, setToken] = useState(null)
@@ -38,6 +41,9 @@ function App() {
         <Route path='/users/editbillinginfo' element={ <EditBilling token={token} user={user} /> } />
         <Route path='/editmyprofile' element={ <EditProfile token={token} user={user} /> } />
         <Route path='/mycart' element={ <Cart token={token} user={user} /> } />
+        <Route path='/adminmenu' element={ <AdminMenu user={user} /> } />
+        <Route path='/adminmenu/newproduct' element={ <AdminNewproduct user={user} /> } />
+        <Route path='/adminmenu/editproduct' element={ <AdminEditProduct user={user} /> } />
       </Routes>
     </div>
   );

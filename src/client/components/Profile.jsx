@@ -8,6 +8,7 @@ const Profile = ({user}) => {
   const navigate = useNavigate()
   // const userparsed =  JSON.parse(user)
   console.log(user)
+  const isAdmin = user.isadmin;
 
   const handleLogOut = () => {
     sessionStorage.clear();
@@ -25,6 +26,7 @@ const Profile = ({user}) => {
             <button onClick={() => navigate('/mybillinginfo')}>Billing Info</button>
             <button onClick={() => navigate('/editmyprofile')}>Edit Profile</button>
             <button onClick={() => handleLogOut()}> Log Out </button>
+            { isAdmin ? <button onClick={() => navigate('/adminmenu')}>Admin Controls</button> : null }
           </div>
         </div>
     </div>
