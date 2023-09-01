@@ -29,7 +29,7 @@ fetchAllProducts()
   return (
     <div>
         {
-        products.map((p) => <div key={p.id} onClick={() => navigate(`/products/${p.id}`)}> 
+        products.map((p) => p.availability && <div key={p.id} onClick={() => navigate(`/products/${p.id}`)}> 
         <h2>{p.title}</h2>
         <img src={p.image} />
         <h4>description: {p.description}</h4>

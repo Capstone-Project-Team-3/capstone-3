@@ -73,7 +73,7 @@ productsRouter.post('/newproduct', requireAdmin, async(req, res, next) => {
     }
 })
 
-productsRouter.delete('/:id', requireAdmin, async (req, res, next) => {
+productsRouter.delete('/:id', async (req, res, next) => {
     try {
         const deleteProducts = await deleteProduct(req.params.id)
         if (!deleteProducts) {
