@@ -68,7 +68,9 @@ async function updateProduct(id, fields = {}) {
 const deleteProduct = async (productId) => {
     try {
         await db.query(`
-        DELETE FROM products WHERE id = $1;
+        UPDATE products
+        SET availability = false
+        WHERE id = $1;
         `, [productId]);
       } catch (err) {
         console.log(err)
