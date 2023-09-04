@@ -17,6 +17,7 @@ import AdminEditProduct from './components/AdminEditProduct';
 function App() {
   const [token, setToken] = useState(null)
   const [user, setUser] = useState('')
+  const [productid, setProductid] = useState('')
   
   useEffect (() => {
     const sessiontoken = sessionStorage.getItem('token')
@@ -34,7 +35,7 @@ function App() {
       <Routes>
         <Route path='/login' element={ <Login setToken={setToken} setUser={setUser} token={token}/> } />
         <Route path='/' element={ <Products token={token} /> } />
-        <Route path='/products/:id' element={ <SingleProduct token={token} user={user}/> } />
+        <Route path='/products/:id' element={ <SingleProduct token={token} user={user} setProductid={setProductid}/> } />
         <Route path='/users/myprofile' element={<Profile token={token} user={user} /> } />
         <Route path='/mybillinginfo' element={ <BillingInfo token={token} user={user} /> } />
         <Route path='/register' element={ <Register /> } />
