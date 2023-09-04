@@ -116,7 +116,7 @@ useEffect(() => {
         { isadmin ? <h3> ADMIN CONTROLS: </h3>: null } 
         { isadmin ? <button onClick={() => navigate('/adminmenu/editproduct')} >Edit Product</button> : null }
         { isadmin ? <button onClick={handleDeleteProduct}>Delete Product</button> : null }
-        <AdminEditProduct productid={productid} />
+        <button onClick={AdminEditProduct}>Edit Product</button>
         </div>
      }   
     </div>
