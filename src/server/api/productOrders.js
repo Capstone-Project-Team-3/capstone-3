@@ -8,22 +8,22 @@ const {
     getOrderId,
     getOrderUserId,
     updateOrder,
-    // deleteOrder
+    deleteProductOrder
 } = require('../db');
 
 
-productordersRouter.post('/neworder', requireUser,  async(req, res, next) => {
-    const { user_id, total, billinginfo_id, createdAt, status } = req.body;
+productordersRouter.post('/neworder',  async(req, res, next) => {
+    const { product_id, quantity, order_id, createdAt, modifiedAt } = req.body;
     try {
-        const order = await createOrder({
-            user_id,
-            total,
-            billinginfo_id,
+        const order = await createProductOrder({
+            product_id,
+            quantity,
+            order_id,
             createdAt,
-            status
+            modifiedAt
         });
         res.send({
-            message: 'Created Product successful!',
+            message: 'Created Product Order successfully!',
         });
         return order;
     } catch({name, message}) {
@@ -47,6 +47,19 @@ productordersRouter.get('/:id', async ( req, res, next ) => {
         res.send(orders)
     } catch({name, message}) {
         next ({name, message})
+    }
+});
+
+productordersRouter.delete('/:id', async (req, res, next) => {
+    try {
+        const order = await deleteProductOrder(req.params.id)
+        if (!order) {
+            res.send("Deleted Successfully!")
+        } else {
+            res.send("Somthing Went Wrong... Unsuccessfull!")
+        }
+    } catch(err) {
+        console.log(err)
     }
 });
 

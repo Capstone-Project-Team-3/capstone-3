@@ -32,7 +32,18 @@ async function getProductOrderByOrderId(order_id) {
     }
   }
 
+  const deleteProductOrder = async (product_id) => {
+    try {
+        await db.query(`
+        DELETE FROM product_orders WHERE product_id = $1;
+        `, [product_id]);
+      } catch (err) {
+        console.log(err)
+      }
+}
+
 module.exports = {
     createProductOrder,
     getProductOrderByOrderId,
+    deleteProductOrder
 };
