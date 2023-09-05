@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import '../css/Cart.css';
-import { useParams, useNavigate, Link } from 'react-route
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 
 const URL = `http://localhost:3000/api/` 
@@ -93,7 +93,7 @@ function Cart({user}) {
                 <br />
             </div>)
         }
-        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button
+        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button>
         <button className="checkout-button">Checkout</button>
 
         
