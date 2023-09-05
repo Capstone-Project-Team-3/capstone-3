@@ -32,7 +32,7 @@ fetchAllProducts()
     <div className="product-grid">
         {
         products.map((p) => p.availability && <div key={p.id} className="product-item" onClick={() => navigate(`/products/${p.id}`)}> 
-        <h2 class='h2p'>{p.title}</h2>
+        <h2 className='h2p'>{p.title}</h2>
         <div className="imagebox">
         <img src={p.image} />
         </div>

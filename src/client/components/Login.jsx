@@ -7,6 +7,7 @@ const Login = ({setToken, setUser}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
