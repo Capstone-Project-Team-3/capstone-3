@@ -13,6 +13,9 @@ function Cart({user}) {
     // const userparsed =  JSON.parse(user)
     // const userid = userparsed.id
     const userid = user.id
+    const [cart, setCart] = useState([]);
+    const total = orderProducts.reduce((total, {price = 0 }) => total + price, 0);
+    const addToCart = (product) => setCart((presentCart) => [...presentCart, product]);
     // console.log(userid)
     useEffect(() => {
     async function getOrderUserId() {
@@ -51,7 +54,7 @@ function Cart({user}) {
         }
         getOrderUserId();
     }, []) 
-
+    const itemsInCart =(id) => cart.filter((product) => product.id === id).length;
     const removeProduct = async (o) => {
         try { 
             const id2 = o.id
@@ -71,7 +74,26 @@ function Cart({user}) {
             );
           }
         }
-    
+        function listOfProductsInCart () 
+        {
+            orderProducts.map((o) => <div key={o.id}>
+               
+                <div>({itemsInCart(o.id)} x ${o.price}) {`${o.name}`}</div> 
+                {/* <button>Quantity</button> */}
+                <button onClick={() => removeProduct(o)} >Remove Item from Cart</button>
+                <br />
+            </div>)
+        }
+        let listOfProductsToBuy = () => orderProducts.map((o) => (
+            <div  key={o.id}>
+            <h3>{o?.title}</h3>
+            <img src={o?.image} />
+            <h3>Price: ${o?.price}</h3>
+                        <br />
+            
+              <button type="submit" onClick={() => addToCart(item)}>Add to Cart</button>
+            </div>
+          ));
     //  async function handleRemoveProduct(o.id) {
     //     console.log(o.id)
     //     e.preventDefault();
@@ -81,18 +103,11 @@ function Cart({user}) {
     return (
     <div>
         <h2>{user.name}'s Cart</h2>
-        {
-            orderProducts.map((o) => <div key={o.id}>
-                <h3>{o?.title}</h3>
-                <img src={o?.image} />
-                <h3>Price: ${o?.price}</h3>
-                <br />
-                {/* <button>Quantity</button> */}
-                <button onClick={() => removeProduct(o)} >Remove Item from Cart</button>
-                <br />
-            </div>)
-        }
-        <button>Checkout</button>
+      
+        <div>{listOfProductsToBuy}</div>
+        <div>{listOfProductsInCart}</div>
+        <div>Total : ${total}</div>
+        <div><button onClick={() => setCart([])}>Clear</button></div>
         
     </div>
         );
