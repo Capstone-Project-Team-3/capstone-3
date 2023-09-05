@@ -1,52 +1,27 @@
-One Stop Shop!
+One Stop E-Commerce Website
 
-A template for building web applications using the PERN (PostgreSQL, Express.js, React, Node.js) stack. 
+Introduction
 
-##  🏁 Getting Started
+Welcome to the One Stop E-Commerce website! This document serves as a guide to help you navigate and understand our online shopping platform. One Stop is your one-stop destination for all your shopping needs, offering a wide range of products from various categories. Whether you're looking for electronics, fashion, home decor, or more, we've got you covered!
 
-1. **Don't fork or clone this repo!** Instead, create a new, empty directory on your machine and `git init` (or create an _empty_ repo on GitHub and clone it to your local machine)
+Browsing Products
+Our website is designed to make it easy for you to find the products you're looking for:
 
-2. Add this template as a remote and merge it into your own repository
+Categories: Browse products by category, such as electronics, clothing, home goods, and more.
+Featured Products: Explore our curated selection of featured products on the homepage.
+Product Details: Click on a product to view detailed information, including images, descriptions and prices.
 
-```bash
-git remote add boilermaker git@github.com:FullstackAcademy/capstone-app-template.git
-git fetch boilermaker
-git merge boilermaker/main
-```
+Checkout Process
+When you're ready to make a purchase, follow these steps:
 
-3. Install packages
+Click on the "Add to Cart" button.
+Product should now be in your cart in the navigation bar.
+Review your order summary.
 
-```bash
-npm i
-```
+Contact and Support
+If you have any questions, encounter issues, or need assistance, don't hesitate to contact our customer support team. You can reach us via:
 
-4. Add a `.env` file with your secret value for auth
-```
-JWT_SECRET='somesecretvalue'
-```
-
-5. Create the database
-
-```bash
-createdb your-database-name
-```
-
-6. Update `src/server/db/client.js` to reflect the name of your database
-
-```js
-const connectionString = process.env.DATABASE_URL || 'https://localhost:5432/your-database-name';
-```
-
-7. Seed the database
-```bash
-npm run seed
-```
-
-8. Start the server
-```bash
-npm run dev
-```
-
-9. Open your browser at `http://localhost:3000`
-
-10. Build something cool! 😎
+Email: support@onestop.com
+Phone: 1-800-123-4567
+Live Chat: Available on our website during business hours.
+Thank you for choosing One Stop for your online shopping needs. We hope you have a great shopping experience with us!
