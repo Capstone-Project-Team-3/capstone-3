@@ -51,8 +51,8 @@ useEffect(() => {
             </table>
             <br />
         <button onClick={() => navigate('/adminmenu/newproduct')}>Add Product</button>
-        <button onClick={() => navigate('/')}>Delete Product</button>
-        <button onClick={() => navigate('/adminmenu/editproduct')}>Edit Product</button>
+        {/* <button onClick={() => navigate('/')}>Delete Product</button>
+        <button onClick={() => navigate('/adminmenu/editproduct')}>Edit Product</button> */}
     </div>
   )
 }
