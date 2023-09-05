@@ -47,10 +47,13 @@ useEffect(() => {
             const response2 = await fetch(`${URL}productorders/neworder`,
               {
               method: 'POST',
-              body: {
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
                 product_id:singleProduct.id,
                 order_id:data.id
-              }
+              })
           });
             const data2 = await response2.json();
             console.log(data2)
