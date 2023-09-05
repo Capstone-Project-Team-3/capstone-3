@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate  } from 'react-router-dom'
-import '../css/Register.css';
+import '../components/css/Register.css';
 
 
 const URL = `http://localhost:3000/api/` 

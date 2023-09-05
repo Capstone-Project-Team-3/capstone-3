@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import '../css/SingleProduct.css';
+import '../components/css/SingleProduct.css';
 import AdminEditProduct from './AdminEditProduct'
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
-import '../css/Products.css';
+import '../components/css/Products.css';
 
 
 

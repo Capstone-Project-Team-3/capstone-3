@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import '../css/Navigation.css';
+import '../components/css/Navigation.css';
 
 function Navigation() {
   const { id } = useParams()
