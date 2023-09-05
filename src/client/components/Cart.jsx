@@ -92,7 +92,7 @@ function Cart({user}) {
                 <br />
             </div>)
         }
-        <button>Checkout</button>
+        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button>
         
     </div>
         );
