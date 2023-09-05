@@ -20,11 +20,11 @@ const Profile = ({user}) => {
       <h1>User Profile</h1>
         <div>
           <div className="user-info">
-            <p>Name: {user?.name}</p>
+            <p className = "name">Name: {user?.name}</p>
             <p>Email: {user?.email}</p>
             <p>Phone Number: {user?.phonenumber}</p>
             <button onClick={() => navigate('/')}>Back To Products</button>
-            <button onClick={() => navigate('/mybillinginfo')}>Billing Info</button>
+            <button onClick={() => navigate('/mybillinginfo')}> View Billing Info</button>
             <button onClick={() => navigate('/editmyprofile')}>Edit Profile</button>
             <button onClick={() => handleLogOut()}> Log Out </button>
             { isAdmin ? <button onClick={() => navigate('/adminmenu')}>Admin Controls</button> : null }

@@ -17,6 +17,7 @@
   .edit-profile form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
   
   .edit-profile label {

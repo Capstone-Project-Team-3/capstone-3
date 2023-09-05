@@ -112,16 +112,15 @@ useEffect(() => {
         <div className="single-product">
         <h2 class='h2sp'>{singleProduct.title}</h2>
         <img class='imgsp'src={singleProduct.image} />
-        <h4>description: {singleProduct.description}</h4>
+        <h4>{singleProduct.description}</h4>
         <h4>price: ${singleProduct.price}</h4> 
-        <h4>seller: {singleProduct.seller}</h4>
+        <h4>Seller: {singleProduct.seller}</h4>
         <button onClick={handleAddProduct}>Add to Cart</button>
         {/* { isadmin ? <button onClick={handleEditProduct}>Edit Product</button> : null } */}
         <button onClick={() => navigate('/')}>Go Back</button>
         { isadmin ? <h3> ADMIN CONTROLS: </h3>: null } 
         { isadmin ? <button onClick={() => navigate('/adminmenu/editproduct')} >Edit Product</button> : null }
         { isadmin ? <button onClick={handleDeleteProduct}>Delete Product</button> : null }
-        <button onClick={AdminEditProduct}>Edit Product</button>
         </div>
      }   
     </div>
