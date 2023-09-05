@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate  } from 'react-router-dom'
+import '../css/Register.css';
 
 
 const URL = `http://localhost:3000/api/` 
@@ -76,9 +77,9 @@ function Register() {
 
 
   return (
-    <div>
-    <h2>Register</h2>
-    <form onSubmit={handleSubmit}>
+    <div className='f'>
+    <h2 class='h2r'>Register</h2>
+    <form class= 'formr' onSubmit={handleSubmit}>
          <label htmlFor='name'>Full Name: </label>
          <input value={name} onChange={handleNameChange} required type='name' name='name'/>
          <label htmlFor='email'>Email: </label>

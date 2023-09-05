@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
+import '../css/Login.css';
 
 const Login = ({setToken, setUser}) => {
   const navigate = useNavigate()
@@ -52,9 +53,14 @@ const Login = ({setToken, setUser}) => {
 
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(prevMode => !prevMode);
+    document.body.classList.toggle('dark-mode'); 
+  };
+
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={`that ${isDarkMode ? 'dark-mode' : ''}`}>
+      <h2 class='h2l'>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Email:</label>
@@ -79,7 +85,10 @@ const Login = ({setToken, setUser}) => {
         <button type='submit'>Login</button>
       </form>
       <Link to='/register'>Don't have an account? Register here</Link>
-      <p>{message}</p>
+      <p className="message">{message}</p>
+      <button className="toggle-dark-mode" onClick={toggleDarkMode}>
+        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </div>
   );
 };

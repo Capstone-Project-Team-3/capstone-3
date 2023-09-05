@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
+import '../css/SingleProduct.css';
 import AdminEditProduct from './AdminEditProduct'
+
 
 
 const URL = `http://localhost:3000/api/` 
@@ -104,9 +106,9 @@ useEffect(() => {
   return (
     <div>
      {
-        <div>
-        <h2>{singleProduct.title}</h2>
-        <img src={singleProduct.image} />
+        <div className="single-product">
+        <h2 class='h2sp'>{singleProduct.title}</h2>
+        <img class='imgsp'src={singleProduct.image} />
         <h4>description: {singleProduct.description}</h4>
         <h4>price: ${singleProduct.price}</h4> 
         <h4>seller: {singleProduct.seller}</h4>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import '../css/Profile.css';
 
 
 const URL = `http://localhost:3000/api/` 
