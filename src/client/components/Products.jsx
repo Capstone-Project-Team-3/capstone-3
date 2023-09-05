@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import {Link, Navigate, useNavigate} from 'react-router-dom'
+import '../css/Products.css';
+
 
 
 const URL = `http://localhost:3000/api/` 
@@ -27,14 +29,14 @@ fetchAllProducts()
 
 
   return (
-    <div>
+    <div className="product-grid">
         {
-        products.map((p) => p.availability && <div key={p.id} onClick={() => navigate(`/products/${p.id}`)}> 
-        <h2>{p.title}</h2>
+        products.map((p) => p.availability && <div key={p.id} className="product-item" onClick={() => navigate(`/products/${p.id}`)}> 
+        <h2 class='h2p'>{p.title}</h2>
         <img src={p.image} />
-        <h4>description: {p.description}</h4>
-        <h4>price: ${p.price}</h4> 
-        <h4>seller: {p.seller}</h4>
+        <h4 className='product-description'>description: {p.description}</h4>
+        <h4 className="product-price">price: ${p.price}</h4> 
+        <h4 className="product-seller">seller: {p.seller}</h4>
         </div>)
         }
     </div>
