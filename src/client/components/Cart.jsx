@@ -94,7 +94,6 @@ function Cart({user}) {
             </div>)
         }
         <button onClick={() => navigate('/cart/myreceipt')} className="checkout-button">Checkout</button>
-        
     </div>
         );
 }
