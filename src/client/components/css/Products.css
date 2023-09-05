@@ -53,3 +53,11 @@
   font-size: 14px; 
   color: #666; 
 }
+
+.imagebox {
+  /* max-width: 100px; */
+  /* max-width: 33vw;
+  min-width: 33vw;
+  max-height: 33vh;
+  min-height: 33vh; */
+}

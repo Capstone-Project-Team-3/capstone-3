@@ -15,6 +15,7 @@ const {
 productordersRouter.post('/neworder',  async(req, res, next) => {
     const { product_id, quantity, order_id, createdAt, modifiedAt } = req.body;
     try {
+        console.log(req.body)
         const order = await createProductOrder({
             product_id,
             quantity,

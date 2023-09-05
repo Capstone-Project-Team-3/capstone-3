@@ -33,10 +33,12 @@ fetchAllProducts()
         {
         products.map((p) => p.availability && <div key={p.id} className="product-item" onClick={() => navigate(`/products/${p.id}`)}> 
         <h2 class='h2p'>{p.title}</h2>
+        <div className="imagebox">
         <img src={p.image} />
-        <h4 className='product-description'>description: {p.description}</h4>
+        </div>
+        {/* <h4 className='product-description'>description: {p.description}</h4> */}
         <h4 className="product-price">price: ${p.price}</h4> 
-        <h4 className="product-seller">seller: {p.seller}</h4>
+        {/* <h4 className="product-seller">seller: {p.seller}</h4> */}
         </div>)
         }
     </div>
