@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import '../css/Navigation.css';
 
 function Navigation() {
   const { id } = useParams()
@@ -8,12 +9,14 @@ function Navigation() {
   const user = sessionStorage.getItem('userSS')
   console.log(token)
   return (
-    <div>
-      <h1> One Stop Shop </h1>
+    <div className="navigation">
+      <h1 className="logo"> One Stop Shop </h1>
+      <div className="links">
       <Link to='/'> Products </Link>
       { !user ? <Link to='/login'> Login </Link> : null }
       { user ? <Link to={`/users/myprofile`}> Profile </Link> : null }
       { user ? <Link to='/mycart'> My Cart </Link> : null }
+      </div>
     </div>
   )
 }

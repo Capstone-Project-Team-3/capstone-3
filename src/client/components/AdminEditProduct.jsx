@@ -2,6 +2,7 @@ import React from 'react'
 import {  useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 const URL = `http://localhost:3000/api/` 
+import SingleProduct from './SingleProduct';
 
 function AdminEditProduct(){
   const navigate = useNavigate()
@@ -13,11 +14,10 @@ function AdminEditProduct(){
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
   const token = sessionStorage.getItem('token')
-  const [productid, setProductid] = useState('')
-  const {id} = productid
-
+  
 async function handleEdit(e){
   e.preventDefault();
+  <SingleProduct id={productid} />
   try{
       const response = await fetch(`${URL}products/${id}`,
       {method: 'Patch', 

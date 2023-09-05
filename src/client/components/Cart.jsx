@@ -1,6 +1,7 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import {useState,useEffect} from 'react'
+import '../css/Cart.css';
+import { useParams, useNavigate, Link } from 'react-route
 
 
 const URL = `http://localhost:3000/api/` 
@@ -79,10 +80,10 @@ function Cart({user}) {
     // }
     
     return (
-    <div>
-        <h2>{user.name}'s Cart</h2>
+    <div className="cart">
+        <h2 h2 className="h2c">{user.name}'s Cart</h2>
         {
-            orderProducts.map((o) => <div key={o.id}>
+            orderProducts.map((o) => <div className="cart-item"  key={o.id}>
                 <h3>{o?.title}</h3>
                 <img src={o?.image} />
                 <h3>Price: ${o?.price}</h3>
@@ -92,7 +93,9 @@ function Cart({user}) {
                 <br />
             </div>)
         }
-        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button>
+        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button
+        <button className="checkout-button">Checkout</button>
+
         
     </div>
         );
