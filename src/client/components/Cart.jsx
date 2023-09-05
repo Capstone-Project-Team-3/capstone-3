@@ -1,12 +1,14 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
 import '../css/Cart.css';
+import { useParams, useNavigate, Link } from 'react-route
 
 
 const URL = `http://localhost:3000/api/` 
 
 function Cart({user}) {
     const [orderid, setOrderid] = useState('');
+    const navigate = useNavigate()
     // const [quantity, setProductids] = useState('');
     const [orderProducts, setOrderProducts] = useState([])
     // const userparsed =  JSON.parse(user)
@@ -50,6 +52,33 @@ function Cart({user}) {
         }
         getOrderUserId();
     }, []) 
+
+    const removeProduct = async (o) => {
+        try { 
+            const id2 = o.id
+            console.log(id2)
+          const response = await fetch(`${URL}productorders/${id2}`,
+          {
+            method: 'DELETE',
+          });
+        //   navigate('/mycart')
+        //   const result = await response.json();
+        //   console.log(result);
+        }  
+        catch (err) {
+          console.error(
+            `Whoops, trouble removing item from your cart!`,
+            err
+            );
+          }
+        }
+    
+    //  async function handleRemoveProduct(o.id) {
+    //     console.log(o.id)
+    //     e.preventDefault();
+    //     // removeProduct();
+    // }
+    
     return (
     <div className="cart">
         <h2 h2 className="h2c">{user.name}'s Cart</h2>
@@ -59,8 +88,8 @@ function Cart({user}) {
                 <img src={o?.image} />
                 <h3>Price: ${o?.price}</h3>
                 <br />
-                <button>Quantity</button>
-                {/* <button onClick={handleDelete()}>Remove</button> */}
+                {/* <button>Quantity</button> */}
+                <button onClick={() => removeProduct(o)} >Remove Item from Cart</button>
                 <br />
             </div>)
         }
