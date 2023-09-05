@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import '../css/EditProfile.css';
 
 
 const URL = `http://localhost:3000/api/` 
@@ -37,8 +38,8 @@ async function handleSubmit(e) {
     setPhoneNumber('')
 }
   return (
-    <div>
-        <h2>Edit Profile</h2>
+    <div className="edit-profile">
+        <h2 className="h2ep">Edit Profile</h2>
         <form onSubmit={handleSubmit}>
             <label>First and Last Name: {' '}<input value={name}  onChange={(e) => {setName(e.target.value)}} placeholder='John Doe'/></label>
             <label>Email: {' '}<input value={email}  onChange={(e) => {setEmail(e.target.value)}}  placeholder='John@example.com'/></label>
