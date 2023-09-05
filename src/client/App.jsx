@@ -13,6 +13,7 @@ import Cart from './components/Cart';
 import AdminMenu from './components/AdminMenu';
 import AdminNewproduct from './components/AdminNewproduct';
 import AdminEditProduct from './components/AdminEditProduct';
+import Receipt from './components/Receipt';
 
 function App() {
   const [token, setToken] = useState(null)
@@ -45,6 +46,7 @@ function App() {
         <Route path='/adminmenu' element={ <AdminMenu user={user} /> } />
         <Route path='/adminmenu/newproduct' element={ <AdminNewproduct user={user} /> } />
         <Route path='/adminmenu/editproduct' element={ <AdminEditProduct user={user} /> } />
+        <Route path='/cart/myreceipt' element={ <Receipt /> } />
       </Routes>
     </div>
   );

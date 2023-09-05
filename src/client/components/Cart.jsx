@@ -93,7 +93,9 @@ function Cart({user}) {
                 <br />
             </div>)
         }
+        <button onClick={() => navigate('/cart/myreceipt')}>Checkout</button
         <button className="checkout-button">Checkout</button>
+
         
     </div>
         );
