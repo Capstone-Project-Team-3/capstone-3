@@ -10,7 +10,7 @@ function Navigation() {
   console.log(token)
   return (
     <div className="navigation">
-      <h1 className="logo"> One Stop Shop </h1>
+      <h1 className="logo"> One Stop</h1>
       <div className="links">
       <Link to='/'> Products </Link>
       { !user ? <Link to='/login'> Login </Link> : null }

@@ -9,7 +9,7 @@
 .product-item {
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -55,9 +55,7 @@
 }
 
 .imagebox {
-  /* max-width: 100px; */
-  /* max-width: 33vw;
-  min-width: 33vw;
-  max-height: 33vh;
-  min-height: 33vh; */
+ max-height: 220px;
+ min-height: 220px;
+ object-fit: fill;
 }
